@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Facts</title>
+</head>
+<body>
+<h1>Random Facts API</h1>
+
+<!-- Section for fetching a random fact -->
+<section>
+    <h2>Get a Random Fact</h2>
+    <button id="randomFactButton">Get Random Fact</button>
+    <p id="randomFactText"></p>
+</section>
+
+<!-- Section for adding a new fact -->
+<section>
+    <h2>Add a New Fact</h2>
+    <form th:action="@{/facts}" method="post">
+        <label for="factText">Fact:</label>
+        <input type="text" id="factText" name="text" required />
+        <button type="submit">Submit Fact</button>
+    </form>
+</section>
+
+<!-- Section for displaying all facts -->
+<section>
+    <h2>All Facts</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fact</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="fact : ${facts}">
+            <td th:text="${fact.id}">1</td>
+            <td th:text="${fact.text}">Sample Fact</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- JavaScript to call the /facts/random API endpoint -->
+<script>
+    document.getElementById("randomFactButton").addEventListener("click", function() {
+        fetch('/facts/random')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("randomFactText").innerText = data;
+            })
+            .catch(error => console.error('Error fetching random fact:', error));
+    });
+</script>
+</body>
+</html>
