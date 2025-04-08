@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Random Facts</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
 </head>
 <body>
 <h1>Random Facts API</h1>
 
 <!-- Section for fetching a random fact -->
-<section>
+<section class="fact-section">
     <h2>Get a Random Fact</h2>
     <button id="randomFactButton">Get Random Fact</button>
     <p id="randomFactText"></p>
 </section>
 
 <!-- Section for adding a new fact -->
-<section>
+<section class="fact-section">
     <h2>Add a New Fact</h2>
     <form th:action="@{/facts}" method="post">
         <label for="factText">Fact:</label>
@@ -25,9 +27,9 @@
 </section>
 
 <!-- Section for displaying all facts -->
-<section>
+<section class="fact-section">
     <h2>All Facts</h2>
-    <table border="1">
+    <table class="fact-table">
         <thead>
         <tr>
             <th>ID</th>
